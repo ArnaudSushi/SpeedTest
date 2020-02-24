@@ -19,8 +19,10 @@ public class SpeedTest {
 	public void launch() throws IOException {
 		try {
 			BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-			while (this.parser.parse(br.readLine()) != 0) {
-				System.out.println("Type the following commands to continue:\n"
+			int parseResult;
+			while ((parseResult = this.parser.parse(br.readLine())) != 0) {
+				System.out.println(parseResult == 1 ? "Game finished, we had so much fun didn't we!\n\n" : "Oops, this command is unknown!\n"
+						+ "Type the following commands to continue:\n"
 						+ "\"Start\" : Launch the game!\n"
 						+ "\"Quit\" : Quit the game!\n");
 			}
@@ -30,7 +32,10 @@ public class SpeedTest {
 	}
 	
 	public int start() {
-		System.out.println("Start");
+		for (int i = 0; i < 10; i++) {
+			for (int j = 0; j < 50; ++j) System.out.println();
+			
+		}
 		return 1;
 	}
 	

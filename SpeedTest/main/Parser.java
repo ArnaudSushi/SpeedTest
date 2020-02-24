@@ -15,7 +15,7 @@ public class Parser {
 		case "quit":
 			return this.speedTest.quit();
 		default:
-			return 1;
+			return 2;
 		}
 	}
 }
