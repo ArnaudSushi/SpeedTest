@@ -11,11 +11,11 @@ public class Parser {
 	public int parse(String command) {
 		switch (command.toLowerCase()) {
 		case "start":
-			return 0;
+			return this.speedTest.start();
 		case "quit":
-			return 1;
+			return this.speedTest.quit();
 		default:
-			return 2;
+			return 1;
 		}
 	}
 }
