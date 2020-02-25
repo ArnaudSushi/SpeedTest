@@ -40,16 +40,19 @@ public class OptionsScreen {
 		
 		this.numberOptionPanel.add(this.numberOptionLabel);
 		this.numberOptionPanel.add(this.numberOptionField);
+		this.setOptionField();
 
 		this.letterWordChoice.addItem("Letters");
 		this.letterWordChoice.addItem("Words");
 		this.letterWordPanel.add(this.letterWordLabel);
 		this.letterWordPanel.add(this.letterWordChoice);
+		//this.setLetterWordChoice();
 		
 		this.caseOptionPanel.add(this.caseOptionLabel);
 		this.caseOptionPanel.add(lowerCaseOption);
 		this.caseOptionPanel.add(upperCaseOption);
 		this.caseOptionPanel.add(bothCaseOption);
+		//this.setcaseOption();
 		
 		this.buttonPanel.add(this.cancelButton);
 		this.buttonPanel.add(this.applyButton);
@@ -64,5 +67,9 @@ public class OptionsScreen {
 		
 		this.window.update(this.window.getGraphics());
 		this.window.setVisible(true);
+	}
+	
+	private void setOptionField() {
+		this.numberOptionField.setText(this.window.getOptions().getTrialNumber());
 	}
 }

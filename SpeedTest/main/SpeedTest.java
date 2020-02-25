@@ -24,6 +24,8 @@ public class SpeedTest extends JFrame implements ActionListener {
 	private Options options;
 	
 	public SpeedTest() {
+		this.options = new Options();
+		
 		this.setTitle("Speed Test!");
 		this.setSize(600, 600);
 		this.setResizable(false);
@@ -51,6 +53,7 @@ public class SpeedTest extends JFrame implements ActionListener {
 		this.add(buttonsPanel, BorderLayout.CENTER);
 		
 		this.setVisible(true);
+		
 	}
 	
 	public void displayMenu() {
@@ -85,5 +88,9 @@ public class SpeedTest extends JFrame implements ActionListener {
 	private void launchGame() {
 		this.getContentPane().removeAll();
 		this.game = new Game(this);
+	}
+	
+	public Options getOptions() {
+		return this.options;
 	}
 }
