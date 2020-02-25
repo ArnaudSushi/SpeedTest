@@ -13,16 +13,15 @@ import javax.swing.SwingConstants;
 
 public class SpeedTest extends JFrame implements ActionListener {
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private JLabel titleLabel = new JLabel("Welcome to the typing speed test!");
 	private JPanel buttonsPanel = new JPanel(); 
 	private JButton playButton = new JButton("Play");
+	private JButton optionButton = new JButton("Option");
 	private JButton quitButton = new JButton("Quit");
-	private JButton hideButton = new JButton("hide");
 	private Game game;
+	private OptionsScreen optionsScreen;
+	private Options options;
 	
 	public SpeedTest() {
 		this.setTitle("Speed Test!");
@@ -38,16 +37,16 @@ public class SpeedTest extends JFrame implements ActionListener {
 		
 		this.playButton.addActionListener(this);
 		this.playButton.setActionCommand("play");
+
+		this.optionButton.addActionListener(this);
+		this.optionButton.setActionCommand("option");
 		
 		this.quitButton.addActionListener(this);
 		this.quitButton.setActionCommand("quit");
 		
-		this.hideButton.addActionListener(this);
-		this.hideButton.setActionCommand("hide");
-		
 		this.buttonsPanel.add(playButton);
+		this.buttonsPanel.add(optionButton);
 		this.buttonsPanel.add(quitButton);
-		this.buttonsPanel.add(hideButton);
 		
 		this.add(buttonsPanel, BorderLayout.CENTER);
 		
@@ -55,10 +54,10 @@ public class SpeedTest extends JFrame implements ActionListener {
 	}
 	
 	public void displayMenu() {
+		this.getContentPane().setLayout(new BorderLayout());
 		this.getContentPane().add(titleLabel, BorderLayout.NORTH);
 		this.add(buttonsPanel, BorderLayout.CENTER);
 		this.update(this.getGraphics());
-		//this.setVisible(true);
 	}
 
 	@Override
@@ -67,6 +66,9 @@ public class SpeedTest extends JFrame implements ActionListener {
 		case "play":
 			this.launchGame();
 			break;
+		case "option":
+			this.manageOptions();
+			break;
 		case "quit":
 			this.dispose();
 			break;
@@ -74,8 +76,13 @@ public class SpeedTest extends JFrame implements ActionListener {
 			break;
 		}
 	}
+	
+	private void manageOptions() {
+		this.getContentPane().removeAll();
+		this.optionsScreen = new OptionsScreen(this);
+	}
 		
-	public void launchGame() {
+	private void launchGame() {
 		this.getContentPane().removeAll();
 		this.game = new Game(this);
 	}
