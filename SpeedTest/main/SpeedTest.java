@@ -53,6 +53,13 @@ public class SpeedTest extends JFrame implements ActionListener {
 		
 		this.setVisible(true);
 	}
+	
+	public void displayMenu() {
+		this.getContentPane().add(titleLabel, BorderLayout.NORTH);
+		this.add(buttonsPanel, BorderLayout.CENTER);
+		this.update(this.getGraphics());
+		//this.setVisible(true);
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

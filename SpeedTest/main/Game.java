@@ -1,11 +1,13 @@
 package main;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
 
-import javax.swing.JFrame;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -13,15 +15,15 @@ import javax.swing.SwingConstants;
 
 public class Game implements KeyListener {
 	
-	private JFrame window;
+	private SpeedTest window;
 	private JPanel targetPanel = new JPanel(new BorderLayout());
 	private JLabel target = new JLabel();
 	private JTextField answerField = new JTextField();
 	
 	private int remainingLetters = 9;
 	
-	public Game(JFrame jFrame) {
-		this.window = jFrame;
+	public Game(SpeedTest mainFrame) {
+		this.window = mainFrame;
 		
 		this.target.setText(this.randLetter());
 		
@@ -56,6 +58,18 @@ public class Game implements KeyListener {
 	
 	private void endGame() {
 		this.target.setText("End of the game!");
+		JButton menuButton = new JButton("Main menu");
+		menuButton.addActionListener(new ActionListener(){
+		      public void actionPerformed(ActionEvent event){
+		    	  returnToMenu();
+		      }
+		});
+		this.targetPanel.add(menuButton, BorderLayout.SOUTH);
+	}
+	
+	private void returnToMenu() {
+		this.window.getContentPane().removeAll();
+		this.window.displayMenu();
 	}
 
 	@Override
