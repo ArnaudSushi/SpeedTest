@@ -120,6 +120,7 @@ public class Game implements KeyListener {
 	}
 	
 	private void endGame() {
+		this.targetPanel.removeAll();
 		this.gameOver = true;
 		this.answerField.setEditable(false);
 		JLabel result = new JLabel("End of the game!");
@@ -129,15 +130,23 @@ public class Game implements KeyListener {
 				+ this.window.getOptions().getTrialType()
 				+ " in "
 				+ this.calculTime());
-		this.targetPanel.add(result);
-		this.targetPanel.add(timeRes);
+		result.setHorizontalAlignment(SwingConstants.CENTER);
+		timeRes.setHorizontalAlignment(SwingConstants.CENTER);
+		JPanel labelPanel = new JPanel();
+		labelPanel.add(result);
+		JPanel timePanel = new JPanel();
+		timePanel.add(timeRes);
+		this.targetPanel.add(labelPanel);
+		this.targetPanel.add(timePanel);
 		JButton menuButton = new JButton("Main menu");
 		menuButton.addActionListener(new ActionListener(){
 		      public void actionPerformed(ActionEvent event){
 		    	  returnToMenu();
 		      }
 		});
-		this.targetPanel.add(menuButton);
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.add(menuButton);
+		this.targetPanel.add(buttonPanel);
 	}
 	
 	private void returnToMenu() {
