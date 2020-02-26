@@ -20,15 +20,13 @@ public class Game implements KeyListener {
 	private JLabel target = new JLabel();
 	private JTextField answerField = new JTextField();
 	
-	private int remainingLetters;
+	private int remainingRounds;
 	
 	public Game(SpeedTest mainFrame) {
 		this.window = mainFrame;
 		
-		this.remainingLetters = Integer.parseInt(this.window.getOptions().getRoundNumber());
-		
-		this.target.setText(this.randLetter());
-		
+		this.remainingRounds = Integer.parseInt(this.window.getOptions().getRoundNumber());
+				
 		this.target.setHorizontalAlignment(SwingConstants.CENTER);
 		this.target.setVerticalAlignment(SwingConstants.CENTER);
 		this.targetPanel.add(this.target, BorderLayout.CENTER);
@@ -41,6 +39,23 @@ public class Game implements KeyListener {
 		
 		this.window.setVisible(true);
 		this.answerField.grabFocus();
+		
+		this.setupRound();
+	}
+	
+	private void setupRound() {
+		if (this.window.getOptions().getTrialType() == "letter") {
+			this.target.setText(this.randLetter());
+		} else {
+			this.target.setText(this.randWord());
+		}
+	}
+	
+	private String randWord() {
+		Random rand = new Random();
+		int wordNum = this.window.getWordOP().getwordCount();
+		int targetRank = rand.nextInt(wordNum);
+		return this.window.getWordOP().getWord(targetRank);
 	}
 	
 	private String randLetter() {
@@ -64,10 +79,11 @@ public class Game implements KeyListener {
 		return Character.toString((char) asciiRank);
 	}
 	
-	private void nextLetter() {
+	private void nextRound() {
+		System.out.println("Entering next round");
 		this.answerField.setText("");
-		if (this.remainingLetters-- > 1) {
-			this.target.setText(this.randLetter());
+		if (this.remainingRounds-- > 1) {
+			this.setupRound();
 		} else {
 			this.endGame();
 		}
@@ -94,8 +110,8 @@ public class Game implements KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent key) {
-		if (Character.toString(key.getKeyChar()).equals(this.target.getText())) {
-			this.nextLetter();
+		if (this.answerField.getText().equals(this.target.getText())) {
+			this.nextRound();
 		}
 	}
 

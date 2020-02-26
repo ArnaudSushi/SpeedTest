@@ -22,9 +22,11 @@ public class SpeedTest extends JFrame implements ActionListener {
 	private Game game;
 	private OptionsScreen optionsScreen;
 	private Options options;
+	private WordOP wordOP;
 	
 	public SpeedTest() {
 		this.options = new Options();
+		this.wordOP = new WordOP();
 		
 		this.setTitle("Speed Test!");
 		this.setSize(600, 600);
@@ -92,5 +94,9 @@ public class SpeedTest extends JFrame implements ActionListener {
 	
 	public Options getOptions() {
 		return this.options;
+	}
+	
+	public WordOP getWordOP() {
+		return this.wordOP;
 	}
 }
