@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Date;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -12,11 +13,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.Timer;
 
-public class Game implements KeyListener {
+public class Game implements KeyListener, ActionListener {
 	
 	private SpeedTest window;
 	private JPanel targetPanel = new JPanel(new BorderLayout());
+	private JLabel timer = new JLabel("0");
+	private int time = 0;
 	private JLabel target = new JLabel();
 	private JTextField answerField = new JTextField();
 	
@@ -31,8 +35,11 @@ public class Game implements KeyListener {
 		this.target.setVerticalAlignment(SwingConstants.CENTER);
 		this.targetPanel.add(this.target, BorderLayout.CENTER);
 		
-		this.window.getContentPane().add(targetPanel, BorderLayout.CENTER);
-		this.window.getContentPane().add(answerField, BorderLayout.SOUTH);
+		this.timer.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		this.window.getContentPane().add(this.targetPanel, BorderLayout.CENTER);
+		this.window.getContentPane().add(this.answerField, BorderLayout.SOUTH);
+		this.window.getContentPane().add(this.timer, BorderLayout.NORTH);
 		this.window.update(this.window.getGraphics());
 		
 		this.answerField.addKeyListener(this);
@@ -41,6 +48,12 @@ public class Game implements KeyListener {
 		this.answerField.grabFocus();
 		
 		this.setupRound();
+		this.launchTimer();
+	}
+	
+	private void launchTimer() {
+		Timer timer = new Timer(1000, this);
+		timer.start();
 	}
 	
 	private void setupRound() {
@@ -61,8 +74,6 @@ public class Game implements KeyListener {
 	private String randLetter() {
 		Random rand = new Random();
 		int asciiRank = 0;
-		int offset;
-		int letterCount;
 		String letterCase = this.window.getOptions().getLetterCase();
 		if (letterCase.equals("a")) {
 			asciiRank = rand.nextInt(26) + 97;
@@ -80,7 +91,6 @@ public class Game implements KeyListener {
 	}
 	
 	private void nextRound() {
-		System.out.println("Entering next round");
 		this.answerField.setText("");
 		if (this.remainingRounds-- > 1) {
 			this.setupRound();
@@ -118,4 +128,9 @@ public class Game implements KeyListener {
 	@Override
 	public void keyTyped(KeyEvent arg0) {}
 
+	@Override
+	public void actionPerformed(ActionEvent event) {
+		this.time++;
+		this.timer.setText(String.valueOf(this.time));
+	}
 }

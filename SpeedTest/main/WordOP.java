@@ -21,6 +21,7 @@ public class WordOP {
 				words[i] = words[i].split("\"")[1];
 			}
 			this.wordCount = words.length;
+			buf.close();
 		} catch (IOException e) { e.printStackTrace(); }
 	}
 	
