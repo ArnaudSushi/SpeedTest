@@ -50,8 +50,8 @@ public class OptionsScreen implements ActionListener {
 		this.numberOptionPanel.add(this.numberOptionField);
 		this.setOptionField();
 
-		this.letterWordChoice.addItem("Letters");
-		this.letterWordChoice.addItem("Words");
+		this.letterWordChoice.addItem("letters");
+		this.letterWordChoice.addItem("words");
 		this.letterWordPanel.add(this.letterWordLabel);
 		this.letterWordPanel.add(this.letterWordChoice);
 		this.setLetterWordChoice();

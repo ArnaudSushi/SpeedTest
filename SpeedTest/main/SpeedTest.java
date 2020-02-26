@@ -28,7 +28,7 @@ public class SpeedTest extends JFrame implements ActionListener {
 		this.wordOP = new WordOP();
 		
 		this.setTitle("Speed Test!");
-		this.setSize(600, 600);
+		this.setSize(400, 400);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		this.setLayout(new BorderLayout());
