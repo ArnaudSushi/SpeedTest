@@ -116,7 +116,7 @@ public class Game implements KeyListener {
 		int hours = this.time / 3600;
 		int minutes = this.time/60 - hours*60;
 		int seconds = this.time - minutes*60;
-		return (hours != 0 ? hours + " hours and" : "") + (minutes != 0 ? minutes + " minutes and" : "") + (seconds + " seconds.");
+		return String.format("%02d" , hours) + ":" + String.format("%02d" , minutes) + ":" + String.format("%02d", seconds);
 	}
 	
 	private void endGame() {
