@@ -20,10 +20,12 @@ public class Game implements KeyListener {
 	private JLabel target = new JLabel();
 	private JTextField answerField = new JTextField();
 	
-	private int remainingLetters = 9;
+	private int remainingLetters;
 	
 	public Game(SpeedTest mainFrame) {
 		this.window = mainFrame;
+		
+		this.remainingLetters = Integer.parseInt(this.window.getOptions().getRoundNumber());
 		
 		this.target.setText(this.randLetter());
 		
@@ -43,13 +45,28 @@ public class Game implements KeyListener {
 	
 	private String randLetter() {
 		Random rand = new Random();
-		int asciiRank = rand.nextInt(26) + 97;
+		int asciiRank = 0;
+		int offset;
+		int letterCount;
+		String letterCase = this.window.getOptions().getLetterCase();
+		if (letterCase.equals("a")) {
+			asciiRank = rand.nextInt(26) + 97;
+		} else if (letterCase.equals("A")) {
+			asciiRank = rand.nextInt(26) + 65;
+		} else if (letterCase.equals("aA")) {
+			asciiRank = rand.nextInt(52);
+			if (asciiRank < 26) {
+				asciiRank = asciiRank + 65;
+			} else {
+				asciiRank = asciiRank + 97 - 26;
+			}
+		}
 		return Character.toString((char) asciiRank);
 	}
 	
 	private void nextLetter() {
 		this.answerField.setText("");
-		if (this.remainingLetters-- > 0) {
+		if (this.remainingLetters-- > 1) {
 			this.target.setText(this.randLetter());
 		} else {
 			this.endGame();
