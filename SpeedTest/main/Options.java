@@ -1,5 +1,6 @@
 package main;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,7 +16,13 @@ public class Options {
 	
 	public Options() {
 		try {
-			InputStream propertiesFile = new FileInputStream("resources/config.properties");
+			File propFile = new File("C:\\ProgramData\\SpeedTest\\config.properties");
+			InputStream propertiesFile;
+			if (!propFile.exists()) {
+				propertiesFile = new FileInputStream("/resources/config.properties");
+			} else {
+				propertiesFile = new FileInputStream(propFile);
+			}
 			Properties prop = new Properties();
 			
 			prop.load(propertiesFile);
@@ -49,7 +56,12 @@ public class Options {
 	
 	private void writeOptions() throws IOException {
 		try {
-			OutputStream propertiesFile = new FileOutputStream("resources/config.properties");
+			File propFile = new File("C:\\ProgramData\\SpeedTest\\config.properties");
+			if (!propFile.exists()) {
+				propFile.getParentFile().mkdirs();
+				propFile.createNewFile();
+			}
+			OutputStream propertiesFile = new FileOutputStream(propFile);
 			Properties prop = new Properties();
 			
 			prop.setProperty("round", this.roundNumber);
@@ -57,6 +69,6 @@ public class Options {
 			prop.setProperty("case", this.letterCase);
 			prop.store(propertiesFile, null);
 			propertiesFile.close();
-		} catch (IOException e) { throw e; }
+		} catch (IOException e) { e.printStackTrace(); throw e; }
 	}
 }

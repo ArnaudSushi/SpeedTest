@@ -1,7 +1,6 @@
 package main;
 
 import java.io.BufferedReader;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -13,7 +12,7 @@ public class WordOP {
 	
 	public WordOP() {
 		try {
-			InputStream wordFile = new FileInputStream("resources/index.json");
+			InputStream wordFile = WordOP.class.getResourceAsStream("/resources/index.json");
 			BufferedReader buf = new BufferedReader(new InputStreamReader(wordFile));
 			String line = buf.readLine();
 			words = line.split(",");
